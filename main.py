@@ -1,8 +1,10 @@
 import asyncio
 import logging
+import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from openai import OpenAI
+from aiohttp import web
 
 BOT_TOKEN = "8855775486:AAEzmCQ8Ep1h_InwBpuc7WDksYOxwAGN09k"
 OPENROUTER_API_KEY = "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"
@@ -37,8 +39,21 @@ async def handle_message(message: types.Message):
         logging.error(f"Error: {e}")
         await message.answer("Извините, произошла ошибка при обработке запроса. Попробуйте еще раз позже.")
 
+async def handle_ping(request):
+    return web.Response(text="Bot is alive")
+
+async def start_web_server():
+    app = web.Application()
+    app.router.add_get("/", handle_ping)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    port = int(os.environ.get("PORT", 10000))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+
 async def main():
     await bot.delete_webhook(drop_pending_updates=True)
+    await start_web_server()
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
