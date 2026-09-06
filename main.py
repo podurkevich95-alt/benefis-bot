@@ -7,7 +7,7 @@ from openai import OpenAI
 from aiohttp import web
 
 BOT_TOKEN = "8855775486:AAGQB5GpvgW8UFDuhzAVI_ASUzzg8P9o5-M"
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
