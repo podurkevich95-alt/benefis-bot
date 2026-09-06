@@ -52,15 +52,16 @@ async def start_web_server():
     await site.start()
 
 async def main():
+    logging.basicConfig(level=logging.INFO)
+    
     # сброс старых зависших обновлений
     await bot.delete_webhook(drop_pending_updates=True)
     
-    # запуск поллинга
-    await dp.start_polling(bot)
+    # Одновременный запуск веб-сервера для Render (чтобы открылся порт) и телеграм-бота
+    await asyncio.gather(
+        start_web_server(),
+        dp.start_polling(bot)
+    )
 
 if __name__ == "__main__":
-    asyncio.run(main())
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())
