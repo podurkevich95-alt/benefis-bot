@@ -5,7 +5,7 @@ from aiogram.filters import CommandStart
 import openai
 
 BOT_TOKEN = "8855775486:AAEzmcQ8Ep1h_InwBpuc7WDKsYOxwAGN09k"
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 client = openai.OpenAI(
     base_url="https://openrouter.ai/api/v1",
