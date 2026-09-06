@@ -6,7 +6,7 @@ from aiogram.filters import CommandStart
 from openai import OpenAI
 from aiohttp import web
 
-BOT_TOKEN = "8855775486:AAEzmCQ8Ep1h_InwBpuc7WDksYOxwAGN09k"
+BOT_TOKEN = "8855775486:AAGQB5GpvgW8UFDuhzAVI_ASUzzg8P9o5-M"
 OPENROUTER_API_KEY = "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"
 
 client = OpenAI(
