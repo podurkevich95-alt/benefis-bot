@@ -273,7 +273,8 @@ async def handle_text(message: Message) -> None:
     # Определяем, похоже ли сообщение на готовность к покупке (для пометки в логе)
     is_lead = detect_lead(user_text)
 
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}] + history
+    system_prompt = await build_system_prompt()
+    messages = [{"role": "system", "content": system_prompt}] + history
 
     await bot.send_chat_action(chat_id, action="typing")
 
